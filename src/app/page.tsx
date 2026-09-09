@@ -2,6 +2,8 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Hammer, PackageCheck } from "lucide-react"
 
+import { HeroParticles } from "@/components/hero-particles"
+import { GitHubContributions } from "@/components/github-contributions"
 import { ProjectFilters } from "@/components/project-filters"
 import { ProjectGrid } from "@/components/project-grid"
 import { getProjects, getProjectStats } from "@/lib/projects"
@@ -33,7 +35,8 @@ export default async function Home({ searchParams }: HomeProps) {
   return (
     <div className="site-shell home-page">
       <section className="hero" aria-labelledby="hero-title">
-        <h1 id="hero-title">Build. Break.<br /><span>Sometimes ship.</span></h1>
+        <div className="hero-copy"><h1 id="hero-title">Small ideas.<br /><span>Real things.</span></h1><p>Tools and experiments, built out of curiosity.</p></div>
+        <HeroParticles />
       </section>
       <section className="project-collection" aria-labelledby="projects-title">
         <div className="section-heading">
@@ -49,6 +52,7 @@ export default async function Home({ searchParams }: HomeProps) {
         <div aria-live="polite" aria-atomic="true" className="sr-only">{projects.length} projects found</div>
         <ProjectGrid projects={projects} />
       </section>
+      <GitHubContributions />
     </div>
   )
 }

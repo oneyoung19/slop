@@ -133,3 +133,103 @@ body { line-height: 1.6; }
   *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
   .project-card:hover { transform: none; }
 }
+
+/* Hero: a generous, split composition with a live particle field. */
+.home-page { padding-top: 12px; }
+.hero { display: grid; grid-template-columns: 1.25fr 1fr; align-items: center; min-height: 470px; gap: 24px; }
+.hero-copy { position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(42px, 5.3vw, 72px); line-height: 1.15; }
+.hero-copy > p { margin-top: 25px; max-width: 360px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+.hero-particles { position: relative; width: 100%; height: 420px; }
+.hero-particles canvas { display: block; width: 100%; height: 100%; }
+.particle-toggle { position: absolute; right: 10px; bottom: 12px; color: var(--muted); cursor: pointer; border: 1px solid var(--line); width: 32px; height: 32px; }
+.project-collection { margin-top: 12px; }
+
+/* Project-specific visual covers share one layout and two quiet palettes. */
+.project-card { padding: 0; gap: 0; overflow: hidden; border-radius: 13px; }
+.card-content { padding: 25px 28px 23px; display: flex; flex: 1; flex-direction: column; gap: 23px; }
+.card-visual { --cover-background: #eee3d8; --cover-ink: #9b593c; position: relative; display: grid; place-items: center; height: 176px; background: var(--cover-background); color: var(--cover-ink); border-bottom: 1px solid var(--line); overflow: hidden; }
+.project-card[data-category="web-app"] .card-visual { --cover-background: #e3e8dd; --cover-ink: #56694c; }
+.card-illustration { display: flex; align-items: center; gap: 28px; transform: translateY(-6px); }
+.visual-node { display: grid; place-items: center; width: 74px; height: 74px; border: 1px solid color-mix(in srgb, var(--cover-ink) 24%, transparent); background: color-mix(in srgb, var(--surface) 65%, transparent); border-radius: 17px; box-shadow: 0 9px 20px #24282206; transition: transform .4s, box-shadow .4s; }
+.visual-node > svg { width: 35px; height: 35px; stroke-width: 1.3; }
+.visual-node:first-child { transform: rotate(-9deg) translateY(5px); }
+.visual-node:last-child { transform: rotate(9deg) translateY(-4px); }
+.visual-connector { width: 35px; height: 35px; stroke-width: 1.3; opacity: .65; transition: transform .4s; }
+.visual-category { position: absolute; bottom: 14px; left: 25px; font-family: var(--font-mono), monospace; font-size: 11px; opacity: .8; }
+.card-meta .card-category { display: none; }
+.card-meta { justify-content: flex-end; }
+.card-description { margin-top: -9px; }
+.card-description h3 { font-size: clamp(25px, 2.3vw, 29px); }
+.card-content .card-footer { padding-top: 4px; }
+.project-card:hover .visual-node:first-child, .project-card:focus-visible .visual-node:first-child { transform: rotate(-14deg) translate(-5px, -2px); }
+.project-card:hover .visual-node:last-child, .project-card:focus-visible .visual-node:last-child { transform: rotate(14deg) translate(5px, 2px); }
+.project-card:hover .visual-connector { transform: scale(1.15); }
+.project-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px #2428220b; }
+
+.github-activity { margin-top: 64px; }
+.activity-profile { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); font-size: 14px; }
+.activity-profile:hover { color: var(--accent); }
+.activity-panel { margin-top: 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 26px; }
+.activity-summary { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; margin-bottom: 26px; font-size: 14px; color: var(--muted); }
+.activity-summary strong { color: var(--foreground); font: 600 24px var(--font-mono), monospace; padding-right: 5px; }
+.activity-summary > span { font: 12px var(--font-mono), monospace; }
+.calendar-scroll { overflow-x: auto; padding-block: 4px 10px; }
+.contribution-calendar { display: grid; gap: 4px; min-width: 740px; }
+.calendar-week { display: grid; min-width: 0; grid-template-columns: minmax(0, 1fr); grid-template-rows: 21px repeat(7, 12px); gap: 4px; }
+.calendar-month { min-width: 0; font-size: 11px; color: var(--muted); white-space: nowrap; }
+.calendar-weekdays { display: grid; grid-template-rows: 25px repeat(7, 12px); gap: 4px; color: var(--muted); font-size: 10px; }
+.calendar-weekdays span:nth-child(1) { grid-row: 3; }
+.calendar-weekdays span:nth-child(2) { grid-row: 5; }
+.calendar-weekdays span:nth-child(3) { grid-row: 7; }
+.contribution-day, .calendar-legend i { display: block; border-radius: 2px; background: var(--soft); }
+.contribution-day { padding: 0; min-width: 0; cursor: pointer; border: 1px solid #24282206; }
+.activity-panel [data-level="1"] { background: #e7c6ae; }
+.activity-panel [data-level="2"] { background: #ce9575; }
+.activity-panel [data-level="3"] { background: #b66c4b; }
+.activity-panel [data-level="4"] { background: #914128; }
+.contribution-day:hover { outline: 2px solid var(--foreground); outline-offset: 1px; }
+.calendar-footer { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 15px; font-size: 12px; color: var(--muted); }
+.calendar-legend { display: flex; align-items: center; gap: 4px; }
+.calendar-legend i { width: 12px; height: 12px; }
+.calendar-legend span { margin-inline: 4px; }
+.activity-placeholder { min-height: 170px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: var(--muted); font-size: 14px; text-align: center; }
+.activity-placeholder button { display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--foreground); padding: 9px 14px; border: 1px solid var(--line); border-radius: 6px; }
+.activity-data { margin-top: 15px; font-size: 12px; color: var(--muted); }
+.activity-data summary { cursor: pointer; width: fit-content; padding-block: 5px; }
+.activity-data > div { max-height: 240px; overflow: auto; margin-top: 12px; }
+.activity-data table { width: 100%; text-align: left; border-collapse: collapse; }
+.activity-data th, .activity-data td { padding: 7px; border-bottom: 1px solid var(--line); }
+.activity-data caption { text-align: left; padding: 7px; }
+@media (prefers-color-scheme: dark) {
+  .card-visual { --cover-background: #30271f; --cover-ink: #d5a386; }
+  .project-card[data-category="web-app"] .card-visual { --cover-background: #242e23; --cover-ink: #a5b499; }
+  .activity-panel [data-level="1"] { background: #593e30; }
+  .activity-panel [data-level="2"] { background: #8c543a; }
+  .activity-panel [data-level="3"] { background: #bc805c; }
+  .activity-panel [data-level="4"] { background: #e4ab83; }
+}
+@media (max-width: 760px) {
+  .hero { min-height: 420px; grid-template-columns: 1.2fr 1fr; gap: 0; }
+  .hero h1 { font-size: clamp(32px, 5.7vw, 46px); }
+  .hero-particles { height: 330px; }
+  .hero-copy > p { font-size: 14px; }
+}
+@media (max-width: 540px) {
+  .hero { grid-template-columns: 1fr; padding-top: 36px; }
+  .hero h1 { font-size: clamp(34px, 9.8vw, 48px); }
+  .hero-copy > p { margin-top: 16px; max-width: 280px; }
+  .hero-particles { height: 255px; max-width: 310px; justify-self: center; margin-top: -4px; }
+  .particle-toggle { right: 0; bottom: 10px; }
+  .card-content { padding: 22px; }
+  .card-illustration { gap: 20px; }
+  .visual-node { width: 66px; height: 66px; }
+  .github-activity { margin-top: 44px; }
+  .activity-panel { padding: 18px; }
+  .activity-summary { flex-direction: column; gap: 8px; }
+  .calendar-footer { align-items: flex-start; flex-direction: column; gap: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .particle-toggle { display: none; }
+  .project-card:hover, .project-card:hover .visual-node, .project-card:focus-visible .visual-node, .project-card:hover .visual-connector { transform: none; }
+}

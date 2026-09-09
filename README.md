@@ -34,3 +34,10 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Homepage visuals and GitHub activity
+
+- `HeroParticles` renders a lightweight Canvas particle field. It pauses off screen and in background tabs, respects reduced-motion preferences, and includes a pause control.
+- GitHub activity displays public contributions for `oneyoung19` using [GitHub Contributions API](https://github.com/grubersjoe/github-contributions-api). The browser loads the last-year endpoint without a token. Upstream caches results for one hour; unavailable or malformed responses show an explicit retry state rather than synthetic data. Change `USERNAME` in `src/components/github-contributions.tsx` to use another profile.
+- Contribution calendars include commits and other GitHub contribution types. Keyboard users can navigate dates with arrow keys or expand the daily data table. On small screens, the calendar scrolls horizontally.
+- Calendar parsing and date alignment checks (Node.js 22.6+): `node --experimental-strip-types --test tests/contributions.test.mjs`.
