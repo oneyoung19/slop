@@ -4,10 +4,9 @@ import { Hammer, PackageCheck } from "lucide-react"
 
 import { HeroParticles } from "@/components/hero-particles"
 import { GitHubContributions } from "@/components/github-contributions"
-import { ProjectFilters } from "@/components/project-filters"
-import { ProjectGrid } from "@/components/project-grid"
+import { ProjectWorkbench } from "@/components/project-workbench"
+import { getGitHubRepository } from "@/lib/github"
 import { getProjects, getProjectStats } from "@/lib/projects"
-import type { ProjectCategory, ProjectStatus } from "@/types/project"
 
 export const metadata: Metadata = {
   title: "Slop — OneYoung's Project Lab",
@@ -16,21 +15,13 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 }
 
-interface HomeProps {
-  searchParams: Promise<{ category?: string; status?: string }>
-}
-
-export default async function Home({ searchParams }: HomeProps) {
-  const { category, status } = await searchParams
+export default async function Home() {
   const stats = getProjectStats()
-
-  const projects = getProjects().filter((project) => {
-    if (category && project.category !== (category as ProjectCategory)) return false
-    if (status && project.status !== (status as ProjectStatus)) return false
-    return true
-  })
-
-  const categories = [...new Set(getProjects().map((project) => project.category))]
+  const projects = getProjects()
+  const categories = [...new Set(projects.map((project) => project.category))]
+  const repos = await Promise.all(
+    projects.map((project) => (project.repo ? getGitHubRepository(project.repo) : Promise.resolve(null)))
+  )
 
   return (
     <div className="site-shell home-page">
@@ -47,10 +38,8 @@ export default async function Home({ searchParams }: HomeProps) {
           </dl>
         </div>
         <Suspense fallback={<div className="filter-placeholder" />}>
-          <ProjectFilters categories={categories} />
+          <ProjectWorkbench projects={projects} repos={repos} categories={categories} />
         </Suspense>
-        <div aria-live="polite" aria-atomic="true" className="sr-only">{projects.length} projects found</div>
-        <ProjectGrid projects={projects} />
       </section>
       <GitHubContributions />
     </div>

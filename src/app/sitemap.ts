@@ -4,6 +4,8 @@ import { getProjects } from "@/lib/projects"
 
 const BASE_URL = "https://slop.oneyoung.com"
 
+export const dynamic = "force-static"
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectEntries: MetadataRoute.Sitemap = getProjects().map((project) => ({
     url: `${BASE_URL}/projects/${project.slug}`,
