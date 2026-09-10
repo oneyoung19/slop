@@ -8,7 +8,7 @@ export const projects: Project[] = [
 
     tagline: "Inspect Claude Code's API traffic, tools and token usage.",
 
-    category: "web-app",
+    category: "cli",
 
     status: "building",
 

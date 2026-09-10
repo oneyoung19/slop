@@ -15,7 +15,7 @@ const illustrations: Record<string, string> = {
 export function ProjectCard({ project, repo }: { project: Project; repo: GitHubRepository | null }) {
   return (
     <Link href={`/projects/${project.slug}`} className="project-card" data-category={project.category}>
-      {illustrations[project.slug] && <Image className="card-background" src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${illustrations[project.slug]}`} alt="" fill unoptimized sizes="(max-width: 767px) 100vw, 50vw" />}
+      {illustrations[project.slug] && <Image className="card-background" src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${illustrations[project.slug]}`} alt="" fill unoptimized sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 25vw" />}
       <div className="card-content">
       <div className="card-meta">
         <span className="card-category" title={CATEGORY_LABELS[project.category]}><ProjectCategoryIcon category={project.category} /><span className="sr-only">{CATEGORY_LABELS[project.category]}</span></span>
