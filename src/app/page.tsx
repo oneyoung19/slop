@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { Hammer, PackageCheck } from "lucide-react"
+import Link from "next/link"
+import { ArrowDown, ArrowUpRight, Hammer, PackageCheck } from "lucide-react"
 
-import { HeroParticles } from "@/components/hero-particles"
 import { GitHubContributions } from "@/components/github-contributions"
 import { ProjectWorkbench } from "@/components/project-workbench"
 import { getGitHubRepository } from "@/lib/github"
@@ -26,10 +26,17 @@ export default async function Home() {
   return (
     <div className="site-shell home-page">
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-copy"><h1 id="hero-title">Small ideas.<br /><span>Real things.</span></h1><p>Tools and experiments, built out of curiosity.</p></div>
-        <HeroParticles />
+        <div className="hero-copy">
+          <div className="hero-kicker"><span aria-hidden="true" /> OneYoung’s independent project lab</div>
+          <h1 id="hero-title">Small ideas.<br /><span>Real things.</span></h1>
+          <p>Tools and experiments, built out of curiosity.<br />A little workbench on the internet.</p>
+          <div className="hero-actions">
+            <a className="hero-primary" href="#workbench">Explore the projects <ArrowDown size={16} aria-hidden="true" /></a>
+            <Link className="hero-secondary" href="/about">Meet the maker <ArrowUpRight size={16} aria-hidden="true" /></Link>
+          </div>
+        </div>
       </section>
-      <section className="project-collection" aria-labelledby="projects-title">
+      <section id="workbench" className="project-collection" aria-labelledby="projects-title">
         <div className="section-heading">
           <h2 id="projects-title">The workbench <span aria-label={`${stats.total} projects`}>{stats.total}</span></h2>
           <dl className="lab-stats">

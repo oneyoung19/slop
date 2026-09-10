@@ -1,8 +1,8 @@
-import { Blocks, FlaskConical, Globe, Puzzle, Terminal, Workflow } from "lucide-react"
+import { Blocks, FlaskConical, Smartphone, Puzzle, Terminal, Workflow } from "lucide-react"
 import type { ProjectCategory } from "@/types/project"
 
 const icons = {
-  "web-app": Globe,
+  "web-app": Smartphone,
   "web-extension": Puzzle,
   cli: Terminal,
   library: Blocks,

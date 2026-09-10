@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   output: "export",
   basePath: isGithubActions ? `/${repoName}` : "",
   assetPrefix: isGithubActions ? `/${repoName}/` : "",
+  env: { NEXT_PUBLIC_BASE_PATH: isGithubActions ? `/${repoName}` : "" },
 };
 
 export default nextConfig;

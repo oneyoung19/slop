@@ -1,25 +1,24 @@
 import Link from "next/link"
-import { ArrowUpRight, ArrowRightLeft, MessageSquare, MessagesSquare, TerminalSquare, Activity, Braces } from "lucide-react"
+import Image from "next/image"
+import { ArrowUpRight } from "lucide-react"
 import { GitHubStatsInline } from "@/components/github-stats"
 import { ProjectCategoryIcon } from "@/components/project-category-icon"
 import { ProjectStatusBadge } from "@/components/project-status"
 import { formatMonthYear } from "@/lib/format"
 import { CATEGORY_LABELS, type GitHubRepository, type Project } from "@/types/project"
 
+const illustrations: Record<string, string> = {
+  "conversation-transfer": "/images/projects/conversation-transfer.webp",
+  "claude-devtools": "/images/projects/claude-devtools.webp",
+}
+
 export function ProjectCard({ project, repo }: { project: Project; repo: GitHubRepository | null }) {
   return (
     <Link href={`/projects/${project.slug}`} className="project-card" data-category={project.category}>
-      <div className="card-visual" aria-hidden="true">
-        {project.category === "web-extension" ? (
-          <div className="card-illustration transfer-illustration"><span className="visual-node"><MessageSquare /></span><ArrowRightLeft className="visual-connector" /><span className="visual-node"><MessagesSquare /></span></div>
-        ) : project.category === "web-app" ? (
-          <div className="card-illustration tools-illustration"><span className="visual-node"><TerminalSquare /></span><Activity className="visual-connector" /><span className="visual-node"><Braces /></span></div>
-        ) : <div className="card-illustration"><span className="visual-node"><ProjectCategoryIcon category={project.category} /></span></div>}
-        <span className="visual-category">{CATEGORY_LABELS[project.category]}</span>
-      </div>
+      {illustrations[project.slug] && <Image className="card-background" src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${illustrations[project.slug]}`} alt="" fill unoptimized sizes="(max-width: 767px) 100vw, 50vw" />}
       <div className="card-content">
       <div className="card-meta">
-        <span className="sr-only">{CATEGORY_LABELS[project.category]}</span>
+        <span className="card-category" title={CATEGORY_LABELS[project.category]}><ProjectCategoryIcon category={project.category} /><span className="sr-only">{CATEGORY_LABELS[project.category]}</span></span>
         <ProjectStatusBadge status={project.status} />
       </div>
       <div className="card-description">

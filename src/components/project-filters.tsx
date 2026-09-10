@@ -3,6 +3,7 @@
 import { SlidersHorizontal } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { CATEGORY_LABELS, STATUS_LABELS, type ProjectCategory } from "@/types/project"
+import { ProjectCategoryIcon } from "@/components/project-category-icon"
 
 export function ProjectFilters({ categories }: { categories: ProjectCategory[] }) {
   const router = useRouter()
@@ -23,7 +24,7 @@ export function ProjectFilters({ categories }: { categories: ProjectCategory[] }
       <div className="category-filters" role="group" aria-label="Project category">
         <button type="button" aria-pressed={!category} onClick={() => setParam("category", "")}>All projects</button>
         {categories.map((c) => (
-          <button type="button" key={c} aria-pressed={category === c} onClick={() => setParam("category", c)}>{CATEGORY_LABELS[c]}</button>
+          <button type="button" key={c} aria-label={CATEGORY_LABELS[c]} title={CATEGORY_LABELS[c]} aria-pressed={category === c} onClick={() => setParam("category", c)}><ProjectCategoryIcon category={c} /></button>
         ))}
       </div>
       <label className="status-filter">

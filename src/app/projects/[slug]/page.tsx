@@ -8,6 +8,7 @@ import { GitHubStatsPanel } from "@/components/github-stats"
 import { ProjectLogList } from "@/components/project-log"
 import { ProjectStatusBadge } from "@/components/project-status"
 import { ProjectTags } from "@/components/project-tags"
+import { ProjectCategoryIcon } from "@/components/project-category-icon"
 import { formatMonthYear } from "@/lib/format"
 import { getGitHubRepository } from "@/lib/github"
 import { getProjectBySlug, getProjects } from "@/lib/projects"
@@ -51,29 +52,29 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <div>
         <Link
           href="/"
-          className="inline-flex items-center gap-2 text-sm text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100"
+          className="back-link"
         >
           <ArrowLeft size={17} aria-hidden="true" /> All projects
         </Link>
       </div>
 
       <div className="flex flex-col gap-3">
-        <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+        <h1 className="text-2xl font-medium tracking-tight">
           {project.name}
         </h1>
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+        <div className="project-details-meta">
           <ProjectStatusBadge status={project.status} />
-          <span>· {CATEGORY_LABELS[project.category]}</span>
-          <span>· Started {formatMonthYear(project.createdAt)}</span>
+          <span className="project-type" title={CATEGORY_LABELS[project.category]}><ProjectCategoryIcon category={project.category} /><span className="sr-only">{CATEGORY_LABELS[project.category]}</span></span>
+          <span>Started {formatMonthYear(project.createdAt)}</span>
         </div>
 
-        <p className="text-neutral-600 dark:text-neutral-400">{project.tagline}</p>
+        <p>{project.tagline}</p>
 
         <ProjectTags tags={project.tags} />
 
         {(project.repo || project.demoUrl) && (
-          <div className="mt-2 flex gap-3 text-sm">
+          <div className="project-actions">
             {repo && (
               <a
                 href={repo.url}
@@ -81,7 +82,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 title="GitHub"
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 rounded-md border border-neutral-200 px-3 py-1.5 text-neutral-700 hover:border-neutral-400 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-600"
+                className="inline-flex min-h-11 items-center gap-2 rounded-md border px-3 py-1.5"
               >
                 <SiGithub size={20} aria-hidden="true" />
               </a>
@@ -91,7 +92,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 href={project.demoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex min-h-11 items-center gap-2 rounded-md border border-neutral-200 px-3 py-1.5 text-neutral-700 hover:border-neutral-400 dark:border-neutral-800 dark:text-neutral-300 dark:hover:border-neutral-600"
+                className="inline-flex min-h-11 items-center gap-2 rounded-md border px-3 py-1.5"
               >
                 <ExternalLink size={17} aria-hidden="true" /> Live Demo
               </a>
@@ -101,29 +102,29 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </div>
 
       {project.summary && (
-        <section className="flex flex-col gap-2 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">About</h2>
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+        <section className="flex flex-col gap-2 border-t pt-8">
+          <h2 className="text-sm font-medium">About</h2>
+          <p className="text-sm leading-relaxed">
             {project.summary}
           </p>
         </section>
       )}
 
       {project.motivation && (
-        <section className="flex flex-col gap-2 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">Why</h2>
-          <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+        <section className="flex flex-col gap-2 border-t pt-8">
+          <h2 className="text-sm font-medium">Why</h2>
+          <p className="text-sm leading-relaxed">
             {project.motivation}
           </p>
         </section>
       )}
 
       {project.learnings && project.learnings.length > 0 && (
-        <section className="flex flex-col gap-2 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+        <section className="flex flex-col gap-2 border-t pt-8">
+          <h2 className="text-sm font-medium">
             What I Learned
           </h2>
-          <ul className="flex flex-col gap-1.5 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          <ul className="flex flex-col gap-1.5 text-sm leading-relaxed">
             {project.learnings.map((learning, i) => (
               <li key={i} className="flex gap-2">
                 <span aria-hidden>·</span>
@@ -135,8 +136,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       )}
 
       {project.logs && project.logs.length > 0 && (
-        <section className="flex flex-col gap-4 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
+        <section className="flex flex-col gap-4 border-t pt-8">
+          <h2 className="text-sm font-medium">
             Build Log
           </h2>
           <ProjectLogList logs={project.logs} />
@@ -144,8 +145,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       )}
 
       {repo && (
-        <section className="flex flex-col gap-3 border-t border-neutral-200 pt-8 dark:border-neutral-800">
-          <h2 className="text-sm font-medium text-neutral-900 dark:text-neutral-100">GitHub</h2>
+        <section className="flex flex-col gap-3 border-t pt-8">
+          <h2 className="text-sm font-medium">GitHub</h2>
           <GitHubStatsPanel repo={repo} />
         </section>
       )}

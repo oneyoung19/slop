@@ -11,15 +11,15 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="reading-page about-page flex flex-1 flex-col">
-      <h1 className="text-2xl font-medium tracking-tight text-neutral-900 dark:text-neutral-100">
+      <h1 className="text-2xl font-medium tracking-tight">
         A place for things<br />I make along the way.
       </h1>
-      <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+      <p className="text-sm leading-relaxed">
         Slop is a personal project lab and build log — a record of the tools, experiments,
         prototypes and abandoned ideas I&apos;ve worked on, regardless of whether they
         succeeded.
       </p>
-      <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+      <p className="text-sm leading-relaxed">
         GitHub provides the facts — commits, stars, activity. Slop provides the context:
         what a project is, why it exists, what state it&apos;s in, and what I learned
         building it.
