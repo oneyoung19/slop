@@ -37,8 +37,9 @@ h1, h2, h3 { font-family: var(--editorial-serif); font-weight: 400; letter-spaci
 .category-filters button[aria-pressed="true"] { background: var(--foreground); color: var(--background); }
 .projects-page .category-filters button[title] { width: 44px; padding: 0; }
 .category-filters button svg { flex-shrink: 0; }
-.status-filter { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--muted); }
-.status-filter select { cursor: pointer; background: var(--surface); color: var(--foreground); font: inherit; }
+.status-filter { position: relative; display: inline-flex; align-items: center; flex-shrink: 0; font-size: 13px; color: var(--muted); }
+.status-filter select { appearance: none; cursor: pointer; background: var(--surface); color: var(--foreground); font: inherit; }
+.status-filter-chevron { position: absolute; right: 14px; pointer-events: none; }
 .filter-placeholder { height: 90px; }
 .project-card { display: flex; flex-direction: column; position: relative; isolation: isolate; min-height: 280px; height: 100%; overflow: hidden; border: 1px solid var(--line); }
 .card-content { display: flex; flex: 1; flex-direction: column; position: relative; z-index: 1; }
@@ -48,7 +49,7 @@ h1, h2, h3 { font-family: var(--editorial-serif); font-weight: 400; letter-spaci
 .card-footer { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto; color: var(--muted); }
 .empty-state { border: 1px dashed var(--line); padding: 52px 24px; text-align: center; }
 .empty-state p { color: var(--muted); font-size: 14px; margin-block: 8px 20px; }
-.empty-state a { display: inline-block; background: var(--foreground); color: var(--background); padding: 12px 20px; font-size: 12px; }
+.empty-state button { cursor: pointer; display: inline-block; background: var(--foreground); color: var(--background); padding: 12px 20px; font-size: 12px; }
 .activity-profile { display: inline-flex; align-items: center; gap: 9px; color: var(--muted); }
 
 .activity-panel { margin-top: 26px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 26px; }
@@ -132,6 +133,10 @@ body .footer-inner { padding-block: 24px; font-size: 12px; }
 .projects-page .project-filters { margin-block: 20px 24px; }
 .projects-page .category-filters { gap: 8px; }
 .projects-page .category-filters button, .projects-page .status-filter select { border: 1px solid var(--line); border-radius: 100px; font-size: 11px; text-transform: uppercase; min-height: 42px; padding-inline: 18px; }
+.projects-page .status-filter select { padding-inline: 16px 38px; }
+.projects-page .status-filter select:hover { border-color: var(--muted); }
+.projects-page .status-filter select:focus { outline: none; }
+.projects-page .status-filter select:focus-visible { border-color: var(--muted); background: var(--soft); }
 .projects-page .category-filters button[aria-pressed="true"] { border-color: var(--foreground); }
 .projects-page .project-collection > ul { gap: 20px; }
 .project-card { border-radius: 24px; background: transparent; transition: border-color .2s; }
@@ -151,7 +156,7 @@ body .footer-inner { padding-block: 24px; font-size: 12px; }
 .projects-page .activity-panel [data-level="2"] { background: #aba6a2; }
 .projects-page .activity-panel [data-level="3"] { background: #797776; }
 .projects-page .activity-panel [data-level="4"] { background: #242424; }
-.projects-page .activity-placeholder button, .projects-page .empty-state a { border-radius: 100px; }
+.projects-page .activity-placeholder button, .projects-page .empty-state button { border-radius: 100px; }
 .projects-page .empty-state { border-radius: 40px; }
 .projects-page .empty-state h3 { font-family: var(--editorial-serif); font-weight: 400; }
 
@@ -215,8 +220,8 @@ body .footer-inner { padding-block: 24px; font-size: 12px; }
   .project-filters { gap: 12px; }
   .projects-page .category-filters button { padding-inline: 12px; }
   .projects-page .category-filters button[title] { padding: 0; }
-  .projects-page .status-filter select { max-width: 132px; padding-inline: 12px; font-size: 10px; }
-  .status-filter > svg { display: none; }
+  .projects-page .status-filter select { padding-inline: 12px 32px; font-size: 10px; }
+  .status-filter-chevron { right: 12px; }
   .project-card .card-content { padding: 24px; }
   .project-card .card-description h3 { font-size: 24px; }
   .project-card .card-background { opacity: .3; }

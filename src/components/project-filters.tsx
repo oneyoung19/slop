@@ -1,39 +1,32 @@
 "use client"
 
-import { SlidersHorizontal } from "lucide-react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { ChevronDown } from "lucide-react"
 import { CATEGORY_LABELS, STATUS_LABELS, type ProjectCategory } from "@/types/project"
 import { ProjectCategoryIcon } from "@/components/project-category-icon"
 
-export function ProjectFilters({ categories }: { categories: ProjectCategory[] }) {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const category = searchParams.get("category")
-  const status = searchParams.get("status")
+interface ProjectFiltersProps {
+  categories: ProjectCategory[]
+  category: string | null
+  status: string | null
+  onFilterChange: (key: "category" | "status", value: string) => void
+}
 
-  function setParam(key: "category" | "status", value: string) {
-    const params = new URLSearchParams(searchParams.toString())
-    if (value) params.set(key, value)
-    else params.delete(key)
-    const query = params.toString()
-    router.push(query ? `/projects?${query}` : "/projects", { scroll: false })
-  }
-
+export function ProjectFilters({ categories, category, status, onFilterChange }: ProjectFiltersProps) {
   return (
     <div className="project-filters">
       <div className="category-filters" role="group" aria-label="Project category">
-        <button type="button" aria-pressed={!category} onClick={() => setParam("category", "")}>All projects</button>
+        <button type="button" aria-pressed={!category} onClick={() => onFilterChange("category", "")}>All projects</button>
         {categories.map((c) => (
-          <button type="button" key={c} aria-label={CATEGORY_LABELS[c]} title={CATEGORY_LABELS[c]} aria-pressed={category === c} onClick={() => setParam("category", c)}><ProjectCategoryIcon category={c} /></button>
+          <button type="button" key={c} aria-label={CATEGORY_LABELS[c]} title={CATEGORY_LABELS[c]} aria-pressed={category === c} onClick={() => onFilterChange("category", c)}><ProjectCategoryIcon category={c} /></button>
         ))}
       </div>
       <label className="status-filter">
-        <SlidersHorizontal size={17} aria-hidden="true" />
         <span className="sr-only">Status</span>
-        <select value={status ?? ""} onChange={(event) => setParam("status", event.target.value)}>
+        <select value={status ?? ""} onChange={(event) => onFilterChange("status", event.target.value)}>
           <option value="">All statuses</option>
           {Object.entries(STATUS_LABELS).map(([value, label]) => <option value={value} key={value}>{label}</option>)}
         </select>
+        <ChevronDown className="status-filter-chevron" size={14} aria-hidden="true" />
       </label>
     </div>
   )
