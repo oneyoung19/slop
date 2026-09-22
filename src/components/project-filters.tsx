@@ -16,7 +16,7 @@ export function ProjectFilters({ categories }: { categories: ProjectCategory[] }
     if (value) params.set(key, value)
     else params.delete(key)
     const query = params.toString()
-    router.push(query ? `/?${query}` : "/", { scroll: false })
+    router.push(query ? `/projects?${query}` : "/projects", { scroll: false })
   }
 
   return (

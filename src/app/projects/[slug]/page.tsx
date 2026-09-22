@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <div className="reading-page flex flex-1 flex-col gap-10">
       <div>
         <Link
-          href="/"
+          href="/projects"
           className="back-link"
         >
           <ArrowLeft size={17} aria-hidden="true" /> All projects

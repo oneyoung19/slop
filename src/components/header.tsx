@@ -11,7 +11,8 @@ export function Header() {
       <div className="site-shell header-inner">
         <Link href="/" className="wordmark" aria-label="Slop home">slop<span>.</span></Link>
         <nav aria-label="Main navigation">
-          <Link href="/" aria-current={pathname === "/" || pathname.startsWith("/projects/") ? "page" : undefined}>Projects</Link>
+          <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>Home</Link>
+          <Link href="/projects" aria-current={pathname === "/projects" || pathname.startsWith("/projects/") ? "page" : undefined}>Projects</Link>
           <Link href="/about" aria-current={pathname === "/about" ? "page" : undefined}>About</Link>
           <a className="icon-link" href="https://github.com/oneyoung19" target="_blank" rel="noreferrer" aria-label="OneYoung on GitHub" title="GitHub"><SiGithub size={21} aria-hidden="true" /></a>
         </nav>

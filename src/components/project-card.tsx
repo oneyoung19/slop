@@ -1,6 +1,5 @@
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowUpRight } from "lucide-react"
 import { GitHubStatsInline } from "@/components/github-stats"
 import { ProjectCategoryIcon } from "@/components/project-category-icon"
 import { ProjectStatusBadge } from "@/components/project-status"
@@ -28,7 +27,6 @@ export function ProjectCard({ project, repo }: { project: Project; repo: GitHubR
       {repo && <GitHubStatsInline repo={repo} />}
       <div className="card-footer">
         <time dateTime={project.createdAt} title="Project started">{formatMonthYear(project.createdAt)}</time>
-        <span className="card-action" aria-hidden="true"><ArrowUpRight size={23} strokeWidth={1.7} /></span>
       </div>
       </div>
     </Link>

@@ -34,7 +34,7 @@ export function ProjectWorkbench({ projects, repos, categories }: ProjectWorkben
         <div className="empty-state">
           <h3>No projects here yet.</h3>
           <p>Try another category or status to explore the lab.</p>
-          <Link href="/">Clear filters</Link>
+          <Link href="/projects">Clear filters</Link>
         </div>
       ) : (
         <ul className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">

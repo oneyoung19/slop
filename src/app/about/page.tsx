@@ -24,7 +24,7 @@ export default function AboutPage() {
         what a project is, why it exists, what state it&apos;s in, and what I learned
         building it.
       </p>
-      <p className="about-footer"><Link href="/" className="inline-flex items-center gap-2">Explore the projects <ArrowUpRight size={18} aria-hidden="true" /></Link></p>
+      <p className="about-footer"><Link href="/projects" className="inline-flex items-center gap-2">Explore the projects <ArrowUpRight size={18} aria-hidden="true" /></Link></p>
     </div>
   )
 }
